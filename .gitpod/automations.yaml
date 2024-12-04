@@ -1,0 +1,18 @@
+services:
+    database:
+        name: PostgreSQL
+        commands:
+            start: docker run postgres
+
+tasks:
+    build:
+        name: Build Code
+        command: yarn && yarn build
+    test:
+        name: Run unit tests
+        dependsOn: ['build']
+        command: yarn test
+    setup:
+        name: Set up the environment
+        dependsOn: ['build', 'test']
+        command: echo "all set up and ready to go"
